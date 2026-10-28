@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kratos Publicidad - Panel de Gestión Front-End</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Iconos de Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+</head>
+<body>
+
+    <!-- Encabezado y Navegación -->
+    <header class="header">
+        <div class="logo-container">
+            <h1>KRATOS <span>PUBLICIDAD</span></h1>
+        </div>
+        <nav class="nav">
+            <a href="#dashboard" class="active">Panel Principal</a>
+            <a href="#registro">Nueva Orden</a>
+            <a href="#ordenes">Listado de Pedidos</a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- Banner de Información del Proyecto SENA -->
+        <section class="sena-card">
+            <h2>Sistema de Gestión de Servicios Publicitarios</h2>
+            <p><strong>Evidencia:</strong> GA6-220501096-AA4-EV03 | <strong>Ficha:</strong> 3336229</p>
+            <p><strong>Desarrolladores:</strong> Fredy Gabriel Aldana Pérez & Pedro Jesid Pacheco Torres</p>
+            <p><strong>Instructor:</strong> Erwing Jesid Dávila García</p>
+            <p><strong>SENA:</strong> Centro Agroturístico San Gil | <strong>Regional:</strong> Santander</p>
+            <p><strong>Fecha de Entrega:</strong> 27 de octubre de 2026</p>
+        </section>
+
+        <!-- Sección Dashboard (Tarjetas de Métricas) -->
+        <section id="dashboard" class="stats-grid">
+            <div class="stat-card">
+                <h3>Órdenes Activas</h3>
+                <span class="stat-number" id="total-ordenes">3</span>
+            </div>
+            <div class="stat-card">
+                <h3>Clientes Registrados</h3>
+                <span class="stat-number">12</span>
+            </div>
+            <div class="stat-card">
+                <h3>Trabajos Pendientes</h3>
+                <span class="stat-number">2</span>
+            </div>
+        </section>
+
+        <!-- Formulario e Interacción -->
+        <section id="registro" class="form-section">
+            <h2>Registrar Nueva Solicitud Publicitaria</h2>
+            <form id="form-orden" class="grid-form">
+                <div class="form-group">
+                    <label for="cliente">Nombre del Cliente / Empresa:</label>
+                    <input type="text" id="cliente" placeholder="Ej: Comercializadora San Gil" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="servicio">Tipo de Servicio:</label>
+                    <select id="servicio" required>
+                        <option value="">Seleccione un servicio...</option>
+                        <option value="Impresión Gran Formato (Pendones/Avisos)">Impresión Gran Formato</option>
+                        <option value="Branding / Diseño de Logotipo">Branding / Diseño de Logotipo</option>
+                        <option value="Litografía (Volantes/Tarjetas)">Litografía (Volantes/Tarjetas)</option>
+                        <option value="Gestión de Redes Sociales">Gestión de Redes Sociales</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" min="1" placeholder="Ej: 100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado">Estado Inicial:</label>
+                    <select id="estado" required>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="En Proceso">En Proceso</option>
+                        <option value="Completado">Completado</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <button type="submit" class="btn-primary">Guardar Orden en el Sistema</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Tabla de Gestión de Pedidos -->
+        <section id="ordenes" class="table-section">
+            <div class="table-header">
+                <h2>Gestión de Pedidos Publicitarios</h2>
+                <input type="text" id="buscar" placeholder="Buscar por cliente o servicio..." class="search-input">
+            </div>
+
+            <div class="table-container">
+                <table id="tabla-pedidos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Servicio Solicitado</th>
+                            <th>Cantidad</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-cuerpo">
+                        <tr>
+                            <td>#101</td>
+                            <td>Almacenes El Sol</td>
+                            <td>Impresión Gran Formato</td>
+                            <td>5</td>
+                            <td><span class="badge pendiente">Pendiente</span></td>
+                            <td><button class="btn-delete" onclick="eliminarFila(this)">Eliminar</button></td>
+                        </tr>
+                        <tr>
+                            <td>#102</td>
+                            <td>Restaurante La Casona</td>
+                            <td>Litografía (Tarjetas)</td>
+                            <td>1000</td>
+                            <td><span class="badge proceso">En Proceso</span></td>
+                            <td><button class="btn-delete" onclick="eliminarFila(this)">Eliminar</button></td>
+                        </tr>
+                        <tr>
+                            <td>#103</td>
+                            <td>Hotel Campestre San Gil</td>
+                            <td>Branding / Diseño</td>
+                            <td>1</td>
+                            <td><span class="badge completado">Completado</span></td>
+                            <td><button class="btn-delete" onclick="eliminarFila(this)">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Pie de Página con Mensaje Inspirador -->
+    <footer class="footer">
+        <p class="footer-quote">"La publicidad no es solo vender productos, es transformar ideas en soluciones visuales de alto impacto."</p>
+        <p>&copy; 2026 Kratos Publicidad — SENA Centro Agroturístico San Gil (Regional Santander) | ADSO Ficha 3336229</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
